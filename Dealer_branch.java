@@ -1,11 +1,9 @@
-package deal_ChinesePoker$doudizhu_fapai;
+package ChinesePokerDealer$doudizhu_fapai;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 
-public class JustDeal {
+public class Dealer_ {
     public static void main(String[] args) {
         final ArrayList<String> all_poker = new ArrayList<>(54);
         Collections.addAll(all_poker, "🃏JOKER", "🃏joker");

@@ -9,13 +9,13 @@ public class Breath {
     // input
     private static File file;
     private static String path;
-    private static String[] suffixs;
+    private static String[] suffix;
     // temp
-    private static ArrayList<File> all_target_file = new ArrayList<>();
+    private static final ArrayList<File> all_target_file = new ArrayList<>();
     // output
-    private static HashSet<String> all_file_type = new HashSet<>();
-    private static HashMap<String, String> same_name_file = new HashMap<>();
-    private static HashMap<String, String> same_size_file = new HashMap<>();
+    private static final HashSet<String> all_file_type = new HashSet<>();
+    private static final HashMap<String, String> same_name_file = new HashMap<>();
+    private static final HashMap<String, String> same_size_file = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
         welcome();
@@ -24,7 +24,7 @@ public class Breath {
     }
 
     // for all file type.
-    // and all the target file according the input String[] suffixs
+    // and all the target file according the input String[] suffix
     private static void forAllTypeAndAllTarget(File dir) {
         File[] files = dir.listFiles();
         assert files != null;
@@ -40,8 +40,8 @@ public class Breath {
                 }
 
                 // for all the file that you want
-                // end with the suffixs you set
-                for (String suffix : suffixs) {
+                // end with the suffix you set
+                for (String suffix : suffix) {
                     if (each_file.getName().endsWith(suffix)){
                         all_target_file.add(each_file);
                     }
@@ -58,7 +58,6 @@ public class Breath {
         System.out.println("all file type: ");
         System.out.println(all_file_type);
         System.out.println();
-        // System.out.println(all_target_file);
         // System.out.println(same_name_file);
 
         System.out.println("all same name file: ");
@@ -80,13 +79,13 @@ public class Breath {
         Properties config = new Properties();
         config.load(new FileReader("duplicate_killer\\src\\version1_3\\info.properties"));
         if (!(config.size() == 1)) {
-            System.out.println("makesure only one key one value");
+            System.out.println("make sure only one key one value");
         }
         Set<String> names = config.stringPropertyNames();
         for (String name : names) {
             path = name;
             String value = config.getProperty(name);
-            suffixs = value.split(",( )*");
+            suffix = value.split(",( )*");
         }
         file = new File(path);
     }
@@ -106,7 +105,7 @@ public class Breath {
     }
     // duplicate killer
     private static void killRepeatAndSameSize(){
-        // for all file'name that are same, put them as key in map
+        // for all file's name that are same, put them as key in map
         // and the value are their path
         for (int i = 0; i < all_target_file.size(); i++) {
             for (int j = i+1; j < all_target_file.size(); j++) {
